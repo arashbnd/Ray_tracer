@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 #include <cmath>
-//#include "MyTuple.h"
 
 class MyTuple {
 private:
@@ -10,11 +9,12 @@ private:
 	static constexpr float EPSILON = 0.00001f;
 public:
 	MyTuple() : x(0), y(0), z(0), w(w == 0 ? 0 : 1) {}
+
 	MyTuple(float x, float y, float z, int w) {
 		this->x = x;
 		this->y = y;
 		this->z = z;
-		if (w == 0) { // needs to be either point or vector
+		if (w <= 0 ) { // needs to be either point or vector
 			this->w = 0;
 		}
 		else {
@@ -22,9 +22,23 @@ public:
 		}
 	}
 
-	friend MyTuple operator-(const MyTuple& t1, const MyTuple& t2);
-	friend MyTuple operator+(const MyTuple& t1, const MyTuple& t2);
+	friend MyTuple operator -(const MyTuple& t1, const MyTuple& t2);
+	friend MyTuple operator +(const MyTuple& t1, const MyTuple& t2);
+	friend MyTuple operator *(const MyTuple& t, const float& num);
+	friend MyTuple operator /( const MyTuple& t, const float& num);
+	
+	friend std::ostream& operator<<(std::ostream& os, const MyTuple& t);
+
 	bool equal(MyTuple t2);
+
+	float magnitude() {
+		return std::sqrt(x*x + y*y + z*z);
+	}
+	
+	MyTuple normalize() {
+		return MyTuple(this->x/this->magnitude(), this->y / this->magnitude(), this->z / this->magnitude(), this->w / this->magnitude());
+	}
+
 
 	float getX() const {
 		return x;
@@ -52,6 +66,12 @@ public:
 		this->w = w;
 	}
 
+	void negateTuple() {
+		this->setX(this->getX() * -1);
+		this->setY(this->getY() * -1);
+		this->setZ(this->getZ() * -1);
+		this->setW(this->getW() * -1);
+	}
 
 	std::string tupleType() {
 		if (this->getW() == 0) {
@@ -61,5 +81,6 @@ public:
 			return "point";
 		}
 	}
+
 
 };
