@@ -3,9 +3,10 @@
 using namespace std;
 
 int main() {
-	MyTuple tobj(3, 2, 1, 1);
-	MyTuple tobj2(5, 6, 7, 1);
-	
-	cout << "Normalization of " << tobj << " is: " << tobj.normalize();
+	MyTuple tobj(1, 2, 3, 1);
+	MyTuple tobj2(2, 3, 4, 1);
+	cout << tobj << " X " << tobj2 << " = " << tobj.crossProduct(tobj2) << endl;
+	cout << tobj2 << " X " << tobj << " = " << tobj2.crossProduct(tobj) << endl;
+
 	return 0;
 }

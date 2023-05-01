@@ -4,83 +4,98 @@
 
 class MyTuple {
 private:
-	float x, y, z;
-	int w;
-	static constexpr float EPSILON = 0.00001f;
+    float x, y, z;
+    int w;
+    static constexpr float EPSILON = 0.00001f;
 public:
-	MyTuple() : x(0), y(0), z(0), w(w == 0 ? 0 : 1) {}
+    MyTuple() : x(0), y(0), z(0), w(w == 0 ? 0 : 1) {}
 
-	MyTuple(float x, float y, float z, int w) {
-		this->x = x;
-		this->y = y;
-		this->z = z;
-		if (w <= 0 ) { // needs to be either point or vector
-			this->w = 0;
-		}
-		else {
-			this->w = 1;
-		}
-	}
+    MyTuple(float x, float y, float z, int w) {
+        this->x = x;
+        this->y = y;
+        this->z = z;
+        if (w <= 0 ) { // needs to be either point or vector
+            this->w = 0;
+        }
+        else {
+            this->w = 1;
+        }
+    }
 
-	friend MyTuple operator -(const MyTuple& t1, const MyTuple& t2);
-	friend MyTuple operator +(const MyTuple& t1, const MyTuple& t2);
-	friend MyTuple operator *(const MyTuple& t, const float& num);
-	friend MyTuple operator /( const MyTuple& t, const float& num);
-	
-	friend std::ostream& operator<<(std::ostream& os, const MyTuple& t);
+    // for performing basic algebraic calculations with vectors
+    friend MyTuple operator -(const MyTuple& t1, const MyTuple& t2);
+    friend MyTuple operator +(const MyTuple& t1, const MyTuple& t2);
+    friend MyTuple operator *(const MyTuple& t, const float& num);
+    friend MyTuple operator /(const MyTuple& t, const float& num);
+    
+    friend std::ostream& operator<<(std::ostream& os, const MyTuple& t);
 
-	bool equal(MyTuple t2);
+    bool equal(MyTuple t2);
 
-	float magnitude() {
-		return std::sqrt(x*x + y*y + z*z);
-	}
-	
-	MyTuple normalize() {
-		return MyTuple(this->x/this->magnitude(), this->y / this->magnitude(), this->z / this->magnitude(), this->w / this->magnitude());
-	}
+    float magnitude() {
+        return std::sqrt(x*x + y*y + z*z);
+    }
 
+    
+    // calculating the normalization of a vecotr, this does no give you the normal vector!
+    // this is for making a unit vecotr and perserving its direction
+    MyTuple normalize() {
+        return MyTuple(this->x/this->magnitude(), this->y / this->magnitude(),
+            this->z / this->magnitude(), this->w);
+    }
 
-	float getX() const {
-		return x;
-	}
-	float getY() const {
-		return y;
-	}
-	float getZ() const {
-		return z;
-	}
-	int getW() const {
-		return w;
-	}
+    float dot(MyTuple t2) {
+        float dotResult = this->x * t2.getX() + this->y * t2.getY() + this->z * t2.getZ();
+        return dotResult;
+    }
 
-	void setX(float x) {
-		this->x = x;
-	}
-	void setY(float y) {
-		this->y = y;
-	}
-	void setZ(float z) {
-		this->z = z;
-	}
-	void setW(int w) {
-		this->w = w;
-	}
+    MyTuple crossProduct(MyTuple t2) {
+        return MyTuple( this->y*t2.getZ() - this->z*t2.getY(), 
+            this->z*t2.getX() - this->x*t2.getZ(),
+            this->x*t2.getY() - this->y*t2.getX(), this->w);
+    }
 
-	void negateTuple() {
-		this->setX(this->getX() * -1);
-		this->setY(this->getY() * -1);
-		this->setZ(this->getZ() * -1);
-		this->setW(this->getW() * -1);
-	}
+    float getX() const {
+        return x;
+    }
+    float getY() const {
+        return y;
+    }
+    float getZ() const {
+        return z;
+    }
+    int getW() const {
+        return w;
+    }
 
-	std::string tupleType() {
-		if (this->getW() == 0) {
-			return "vector";
-		}
-		else {
-			return "point";
-		}
-	}
+    void setX(float x) {
+        this->x = x;
+    }
+    void setY(float y) {
+        this->y = y;
+    }
+    void setZ(float z) {
+        this->z = z;
+    }
+    void setW(int w) {
+        this->w = w;
+    }
+
+    void negateTuple() {
+        this->setX(this->getX() * -1);
+        this->setY(this->getY() * -1);
+        this->setZ(this->getZ() * -1);
+        this->setW(this->getW() * -1);
+    }
+
+    std::string tupleType() {
+        if (this->getW() == 0) {
+            return "vector";
+        }
+        else {
+            return "point";
+        }
+    }
 
 
 };
