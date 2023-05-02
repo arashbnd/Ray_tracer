@@ -1,7 +1,1 @@
-classes:
-    projectile
-    environment
-
-functions:
-    tick
-        
+investigate why tick doesn't change
