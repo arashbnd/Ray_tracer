@@ -1,14 +1,16 @@
+
 #include <iostream>
 #include <string>
 #include <cmath>
 
+# pragma once
 class MyTuple {
 private:
     float x, y, z;
     int w;
     static constexpr float EPSILON = 0.00001f;
 public:
-    MyTuple() : x(0), y(0), z(0), w(w == 0 ? 0 : 1) {}
+    MyTuple() : x(0.0f), y(0.0f), z(0.0f), w(w == 0 ? 0 : 1) {}
 
     MyTuple(float x, float y, float z, int w) {
         this->x = x;
@@ -23,8 +25,10 @@ public:
     }
 
     // for performing basic algebraic calculations with vectors
+    // 1st param: vector 2nd param: vector
     friend MyTuple operator -(const MyTuple& t1, const MyTuple& t2);
     friend MyTuple operator +(const MyTuple& t1, const MyTuple& t2);
+    // 1st param: vector 2nd param: scalar
     friend MyTuple operator *(const MyTuple& t, const float& num);
     friend MyTuple operator /(const MyTuple& t, const float& num);
     
@@ -37,8 +41,8 @@ public:
     }
 
     
-    // calculating the normalization of a vecotr, this does no give you the normal vector!
-    // this is for making a unit vecotr and perserving its direction
+    // calculating the normalization of a vector, does not give you the normal vector!
+    // this is for making a unit vector and perserving its direction
     MyTuple normalize() {
         return MyTuple(this->x/this->magnitude(), this->y / this->magnitude(),
             this->z / this->magnitude(), this->w);
@@ -54,6 +58,9 @@ public:
             this->z*t2.getX() - this->x*t2.getZ(),
             this->x*t2.getY() - this->y*t2.getX(), this->w);
     }
+
+
+
 
     float getX() const {
         return x;
