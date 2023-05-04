@@ -1,25 +1,35 @@
-//This class alongside Environment, is used to demo the MyTuple class
+//This class alongside Environment, is used to demo the Tuple class
 
-#include "MyTuple.h"
+#include "Tuple.h"
 #pragma once
 
 class Projectile {
 private:
-	MyTuple position; // point
-	MyTuple velocity; // vector
+	Tuple position; // point
+	Tuple velocity; // vector
 
 public:
-	Projectile(MyTuple position, MyTuple velocity) : position(position), velocity(velocity) {}
+	Projectile(Tuple position, Tuple velocity) : position(position), velocity(velocity) {}
 
-	MyTuple getPosition() const {
+	Tuple getPosition() const {
 		return position;
 	}
 
-	MyTuple getVelocity() const {
+	Tuple getVelocity() const {
 		return velocity;
 	}
 
+	// void setX(float x) {
+   //  this->x = x;
+
+	void setPosition(Tuple pos) {
+		position = pos;
+	}
+	void setVelocity(Tuple vel) {
+		velocity = vel;
+	}
 	friend std::ostream& operator<<(std::ostream& os, const Projectile& t);
+
 };
 
 

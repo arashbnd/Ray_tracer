@@ -1,21 +1,21 @@
 
-//This class alongside Projectile, is used to demo the MyTuple class
+//This class alongside Projectile, is used to demo the Tuple class
 
-#include "MyTuple.h"
+#include "Tuple.h"
 #pragma once
 
 
 class Environment {
 private:
-	MyTuple gravity, wind; // both vectors
+	Tuple gravity, wind; // both vectors
 
 public:
-	Environment(MyTuple gravity, MyTuple wind) : gravity(gravity), wind(wind) {}
+	Environment(Tuple gravity, Tuple wind) : gravity(gravity), wind(wind) {}
 	
-	MyTuple getGravity() const {
+	Tuple getGravity() const {
 		return gravity;
 	}
-	MyTuple getWind() const {
+	Tuple getWind() const {
 		return wind;
 	}
 };

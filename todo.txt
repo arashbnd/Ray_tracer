@@ -1,1 +1,1 @@
-investigate why tick doesn't change
+investigate why tick changes the value of position in a positive way?!
