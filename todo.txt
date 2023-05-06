@@ -1,1 +1,5 @@
-investigate why tick changes the value of position in a positive way?!
+1.should I make a constructor for tuple, that doesn't assign w, spicifically for colors?
+since color "is a" Tuple, inherit from it.
+
+2.while overloading operators, why do the paramters of the function require the const and & keywords?
+
