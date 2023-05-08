@@ -46,6 +46,12 @@ int main() {
     glfwGetFramebufferSize(window, &width, &height);
     glViewport(0, 0, width, height);
 
+    const GLubyte* glVersion = glGetString(GL_VERSION);
+    const GLubyte* glslVersion = glGetString(GL_SHADING_LANGUAGE_VERSION);
+    std::cout << "OpenGL Version: " << glVersion << std::endl;
+    std::cout << "GLSL Version: " << glslVersion << std::endl;
+
+
     // Main loop
     while (!glfwWindowShouldClose(window)) {
         // Clear the color buffer
