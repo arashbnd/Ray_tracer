@@ -10,61 +10,42 @@ using namespace std;
 
 Projectile tick(Environment& env, Projectile& proj);
 
-int main() {
 
-    // Initialize GLFW
-    if (!glfwInit()) {
-        std::cerr << "Failed to initialize GLFW" << std::endl;
-        return -1;
+    void display() {
+        glClearColor(0.0f, 0.0f, 0.7f, 1.0f); // Set the clear color
+        glClear(GL_COLOR_BUFFER_BIT); // Clear the color buffer
+
+        glBegin(GL_LINES);
+        glVertex2f(0.5f, 0.5f);
+        glVertex2f(-0.5f, 0.5f);
+        glVertex2f(-0.5f, -0.5f);
+        glVertex2f(0.5f, -0.5f);
+        glEnd();
+
+        glFlush(); // Flush the drawing commands
     }
 
-    // Create a GLFW window with OpenGL 3.3 core profile
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    int main() {
+        glfwInit(); // Initialize GLFW
 
-    GLFWwindow* window = glfwCreateWindow(800, 600, "OpenGL Window", nullptr, nullptr);
-    if (!window) {
-        std::cerr << "Failed to create GLFW window" << std::endl;
-        glfwTerminate();
-        return -1;
-    }
+        // Create a window and OpenGL context
+        GLFWwindow* window = glfwCreateWindow(800, 600, "OpenGL Example", nullptr, nullptr);
+        if (window == nullptr) {
+            glfwTerminate();
+            return -1;
+        }
 
-    // Make the window's context current
-    glfwMakeContextCurrent(window);
+        glfwMakeContextCurrent(window); // Set the current OpenGL context
 
-    // Initialize GLEW
-    GLenum err = glewInit();
-    if (err != GLEW_OK) {
-        std::cerr << "Failed to initialize GLEW: " << glewGetErrorString(err) << std::endl;
-        glfwTerminate();
-        return -1;
-    }
+        while (!glfwWindowShouldClose(window)) {
+            display(); // Call the display function
 
-    // Set the viewport size
-    int width, height;
-    glfwGetFramebufferSize(window, &width, &height);
-    glViewport(0, 0, width, height);
+            glfwSwapBuffers(window); // Swap buffers
+            glfwPollEvents(); // Process events
+        }
 
-    const GLubyte* glVersion = glGetString(GL_VERSION);
-    const GLubyte* glslVersion = glGetString(GL_SHADING_LANGUAGE_VERSION);
-    std::cout << "OpenGL Version: " << glVersion << std::endl;
-    std::cout << "GLSL Version: " << glslVersion << std::endl;
+        glfwTerminate(); // Clean up and terminate GLFW
 
-
-    // Main loop
-    while (!glfwWindowShouldClose(window)) {
-        // Clear the color buffer
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
-
-        // Poll events and swap buffers
-        glfwPollEvents();
-        glfwSwapBuffers(window);
-    }
-
-    // Clean up and exit
-    glfwTerminate();
 	return 0;
 
 }
