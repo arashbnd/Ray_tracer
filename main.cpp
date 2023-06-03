@@ -5,7 +5,6 @@
 #include "color.h"
 #include <gl/glew.h>
 #include <glfw/glfw3.h>
-
 using namespace std;
 
 Projectile tick(Environment& env, Projectile& proj);
@@ -16,10 +15,15 @@ Projectile tick(Environment& env, Projectile& proj);
         glClear(GL_COLOR_BUFFER_BIT); // Clear the color buffer
 
         glBegin(GL_LINES);
+        // line one
         glVertex2f(0.5f, 0.5f);
         glVertex2f(-0.5f, 0.5f);
-        glVertex2f(-0.5f, -0.5f);
+        // line two
+        glVertex2f(0.5f, 0.5f);
         glVertex2f(0.5f, -0.5f);
+        // added thrid line to form triangle
+        glVertex2f(0.5f, -0.5f);
+        glVertex2f(-0.5f, 0.5f);
         glEnd();
 
         glFlush(); // Flush the drawing commands
