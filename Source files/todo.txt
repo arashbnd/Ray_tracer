@@ -1,0 +1,14 @@
+1.should I make a constructor for tuple, that doesn't assign w, spicifically for colors?
+since color "is a" Tuple, inherit from it.
+
+2.while overloading operators, why do the paramters of the function require the const and & keywords?
+
+
+
+3. do getters and setters need to be repeated for derived classes?
+ nope, unless you need new functionalities.
+
+4. how to make a window?
+    4.1 which one do I need to make a window, GLFW or GLEW?
+    glfw, but in order to use
+5. did this change ?
